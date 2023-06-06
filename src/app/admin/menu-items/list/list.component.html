@@ -1,0 +1,48 @@
+<mat-card class="m-2 p-0">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 p-2">
+        <div></div>
+        <a mat-raised-button color="primary" routerLink="/admin/menu-items/add">
+            <mat-icon class="mat-icon-md">add</mat-icon>
+            Add New Menu Item
+        </a>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="table-wrapper"> 
+        <table  class="w-100">
+        
+            <!-- ID Column -->
+                <th > ID </th>            
+            <!-- Image Column -->
+                <th > Image </th>
+            <!-- Category Column -->
+                <th > Category </th>
+            <!-- Name Column -->
+                <th > Name </th>
+            <!-- Price Column -->
+                <th > Price </th>
+            <!-- Discount Column -->
+                <th > Discount </th>
+            <!-- Availibility Count Column -->
+                <th > Availibility Count </th>
+            <!-- Is Vegetarian Column -->
+                <th > Is Vegetarian </th>
+                <tbody> 
+                <tr *ngFor="let menu of menuItem">
+                <td>{{menu.id}}</td>
+
+                <td style="max-width: 100px; height: 100px;">
+                    <img [src]="getImagebased64(menu.image)" style="width: 100px; height: 100px;">
+                  </td>                
+                <td>vvvv</td>
+                <td>{{menu.name}}</td>
+                <td>{{menu.price}}</td>
+                <td>{{menu.discount}}</td>
+                <td>{{menu.availibilityCount}}</td>
+                <td>{{menu.isVegetarian}}</td>
+
+            </tr>
+                </tbody>
+        </table> 
+    </div>
+</mat-card>
