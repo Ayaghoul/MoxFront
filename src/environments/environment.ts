@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  url: ''
+  apiUrl: 'http://localhost:8080/',
+  token:'token',
+  users:'users',
+  ExpiresIn:'ExpiresIn',
+  connectedUser:'connectedUser'
 };
 
 /*

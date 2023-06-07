@@ -1,5 +1,6 @@
 export class Menu {
     constructor(public id: number,
+                public role: string,
                 public title: string,
                 public routerLink: string | null,
                 public href: string | null, 

@@ -21,7 +21,7 @@ export class MenuItemComponent implements OnInit {
   constructor(public appService:AppService,private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.getAllMenu();
+    // this.getAllMenu();
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}){  

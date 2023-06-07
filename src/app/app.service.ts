@@ -36,7 +36,7 @@ export class AppService {
     0 //totalCartCount
   )  
   
-  public url = environment.url + '/assets/data/'; 
+  public url = '/assets/data/';
   
   constructor(public http:HttpClient, 
               private datePipe:DatePipe,

@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; 
 export function HttpLoaderFactory(httpClient: HttpClient) { 
-  return new TranslateHttpLoader(httpClient, environment.url +'/assets/i18n/', '.json');
+  return new TranslateHttpLoader(httpClient, '/assets/i18n/', '.json');
 }
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorI18nService } from './theme/utils/mat-paginator-i18n.service';
@@ -36,6 +36,8 @@ import { HorizontalMenuComponent } from './theme/components/menu/horizontal-menu
 import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/vertical-menu.component';
 import { FooterComponent } from './theme/components/footer/footer.component'; 
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
+import {AuthService} from "./core/authentication/auth.service";
+import {AuthInterceptors} from "./core/interceptors/auth-interceptors";
 
 
 @NgModule({
@@ -69,8 +71,10 @@ import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
   ],
   providers: [ 
     AppSettings,
+      AuthService,
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptors, multi: true },
     DatePipe,
     { provide: MatPaginatorIntl, useClass: MatPaginatorI18nService }
   ],
