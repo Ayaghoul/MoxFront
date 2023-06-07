@@ -1,12 +1,12 @@
 <ng-container *ngFor="let menuItem of menuItems">
-    <a *ngIf="menuItem.routerLink && !menuItem.hasSubMenu &&  filterRole(user.roles, menuItem.role)  " mat-button
+    <a *ngIf="menuItem.routerLink && !menuItem.hasSubMenu &&  isAdmin(user?.roles, menuItem.role)  " mat-button
 
        [routerLink]="[menuItem.routerLink]"
        routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">
         <span>{{ menuItem.title | translate }}</span>
     </a>
 
-    <a *ngIf="menuItem.href && !menuItem.hasSubMenu &&  user.roles.includes(menuItem.role)" mat-button
+    <a *ngIf="menuItem.href && !menuItem.hasSubMenu &&  user?.roles.includes(menuItem.role)" mat-button
        [attr.href]="menuItem.href || ''" [attr.target]="menuItem.target || ''">
         <span>{{ menuItem.title | translate }}</span>
     </a>

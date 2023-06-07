@@ -35,8 +35,12 @@ export class HorizontalMenuComponent implements OnInit {
         });
     }
 
-    filterRole(roles: any, role: string): boolean {
-        const foundRole = roles.find(re => re.roleName === role);
-        return !!foundRole; // Convert foundRole to a boolean value
+    isAdmin(roles: any, role: string): boolean {
+        if (roles) {
+
+            const foundRole = roles.find(re => re.roleName === role);
+            return !!foundRole; // Convert foundRole to a boolean value
+        }
+        return false;
     }
 }
