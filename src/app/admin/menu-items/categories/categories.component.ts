@@ -7,6 +7,7 @@ import { Category } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { HttpClient } from '@angular/common/http';
+import {CategoriesService} from "../../../core/services/categories.service";
 
 @Component({
   selector: 'app-categories',
@@ -19,7 +20,9 @@ export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
-  constructor(public appService:AppService, public snackBar: MatSnackBar,private http:HttpClient) { }
+  constructor(public appService:AppService,
+              private categoriesService:CategoriesService,
+              public snackBar: MatSnackBar,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.fetchCategories();
@@ -72,7 +75,7 @@ export class CategoriesComponent implements OnInit {
 
 
   fetchCategories() {
-    this.http.get<Category[]>('http://localhost:9922/restau/getC').subscribe((categories: Category[]) => {
+    this.categoriesService.getAllCategories().subscribe((categories: Category[]) => {
       this.dataSource = new MatTableDataSource(categories);
     }); 
   }

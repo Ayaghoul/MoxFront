@@ -8,7 +8,8 @@ export const environment = {
   token:'token',
   users:'users',
   ExpiresIn:'ExpiresIn',
-  connectedUser:'connectedUser'
+  connectedUser:'connectedUser',
+  categories: "categories"
 };
 
 /*
