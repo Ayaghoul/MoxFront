@@ -15,7 +15,6 @@ export class AuthInterceptors implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem(environment.token);
-        console.log(token)
         if (token)
         request = request.clone({
             setHeaders: {
@@ -30,7 +29,9 @@ export class AuthInterceptors implements HttpInterceptor {
                     if (error.error instanceof ErrorEvent) {
                         console.log('This is client side error');
                         errorMsg = `Error: ${error.error.message}`;
-                    } else if (error?.error?.stack?.startsWith('JsonWebTokenError') || error?.error?.stack?.startsWith('TokenExpiredError') ) {
+                    } else if (error?.error?.stack?.startsWith('JsonWebTokenError')
+                        || error?.error?.stack?.startsWith('TokenExpiredError')
+                        || error?.error.includes('TokenExpiredException') ) {
                         console.log('Votre session est expirée');
                         this.auth.logout();
                         errorMsg = `Error: ${error.error.message}`;

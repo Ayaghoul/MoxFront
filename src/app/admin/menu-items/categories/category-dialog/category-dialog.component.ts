@@ -48,6 +48,22 @@ export class CategoryDialogComponent implements OnInit {
 
         }
     }
+    public onEdit() {
+        if (this.form.valid) {
+            this.categoriesService.editCategory(this.category.id, this.form.value ).subscribe(
+                (response) => {
+                    this.dialogRef.close(response);
+                    // La catégorie a été ajoutée avec succès
+                    console.log(response);
+                },
+                (error) => {
+                    // Une erreur s'est produite lors de l'ajout de la catégorie
+                    console.error(error);
+                }
+            );
+
+        }
+    }
 
 }
   

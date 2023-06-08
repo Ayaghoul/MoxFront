@@ -6,7 +6,7 @@
         <span>{{ menuItem.title | translate }}</span>
     </a>
 
-    <a *ngIf="menuItem.href && !menuItem.hasSubMenu &&  user?.roles.includes(menuItem.role)" mat-button
+    <a *ngIf="menuItem.href && !menuItem.hasSubMenu &&  user?.roles?.includes(menuItem.role)" mat-button
        [attr.href]="menuItem.href || ''" [attr.target]="menuItem.target || ''">
         <span>{{ menuItem.title | translate }}</span>
     </a>

@@ -9,7 +9,8 @@ export const environment = {
   users:'users',
   ExpiresIn:'ExpiresIn',
   connectedUser:'connectedUser',
-  categories: "categories"
+  categories: "categories",
+  menuItems: "menuItems"
 };
 
 /*
