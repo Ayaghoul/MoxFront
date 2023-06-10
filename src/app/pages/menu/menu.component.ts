@@ -7,6 +7,7 @@ import { MenuItem, Pagination } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { AppSettings, Settings } from 'src/app/app.settings';
 import {MenuItemService} from "../../core/services/menu-item.service";
+import {CategoriesService} from "../../core/services/categories.service";
 
 @Component({
   selector: 'app-menu',
@@ -31,6 +32,7 @@ export class MenuComponent implements OnInit {
   public settings: Settings;
 
   constructor(public appSettings:AppSettings,
+              private categoriesService:CategoriesService,
               private menuItemService:MenuItemService,
               public appService:AppService,
               public mediaObserver: MediaObserver) {
@@ -73,7 +75,7 @@ export class MenuComponent implements OnInit {
   }
 
   public getCategories(){
-    this.appService.getCategories().subscribe(categories=>{
+    this.categoriesService.getAllCategories().subscribe(categories=>{
       this.categories = categories;
       this.appService.Data.categories = categories;
     })

@@ -38,7 +38,6 @@ export class Toolbar1Component implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.usersService.favoritesSubject.unsubscribe();
-        this.usersService.favoritesSubject.complete();
 
     }
 }

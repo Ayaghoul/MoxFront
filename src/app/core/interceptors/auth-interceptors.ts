@@ -31,13 +31,13 @@ export class AuthInterceptors implements HttpInterceptor {
                         errorMsg = `Error: ${error.error.message}`;
                     } else if (error?.error?.stack?.startsWith('JsonWebTokenError')
                         || error?.error?.stack?.startsWith('TokenExpiredError')
-                        || error?.error?.includes('TokenExpiredException') ) {
+                         ) {
                         console.log('Votre session est expirée');
                         this.auth.logout();
                         errorMsg = `Error: ${error.error.message}`;
                     }
                     console.log(errorMsg);
-                    return throwError(errorMsg);
+                    return throwError(error);
                 })
             )
     }

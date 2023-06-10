@@ -47,9 +47,7 @@ export class AuthService {
 
     private setSession(authResult: { expiredIn: moment.DurationInputArg1; id: string; token: string; }) {
         console.log(authResult)
-        const expiresAt = moment().add(authResult.expiredIn, 'second');
         localStorage.setItem(environment.token, authResult.token);
-        localStorage.setItem(environment.ExpiresIn, JSON.stringify(expiresAt.valueOf()));
     }
 
     logout() {
@@ -83,6 +81,7 @@ export class AuthService {
     public addUser(user: any) {
         return this.http.post(`${environment.apiUrl}${environment.users}/signup`, user)
             .pipe(catchError(err => {
+                console.log(err)
                 return throwError(err);
             }))
     }
