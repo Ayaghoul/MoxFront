@@ -4,6 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {AppSettings, Settings} from 'src/app/app.settings';
 import {AuthService} from "../../core/authentication/auth.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
     constructor(public fb: UntypedFormBuilder, public router: Router, private sanitizer: DomSanitizer,
                 private authService: AuthService,
+                public snackBar: MatSnackBar,
                 public appSettings: AppSettings) {
         this.settings = this.appSettings.settings;
     }
@@ -34,10 +36,20 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             console.log(this.loginForm.value)
             this.authService.login(this.loginForm.value).subscribe(res => {
+                this.showToasts('success', 'Bienvenue');
 
                 this.router.navigate(['/']);
             })
         }
     }
 
+    private showToasts(status: string, message: string) {
+        this.snackBar.open(message, '×', {
+            panelClass: status,
+            verticalPosition: 'top',
+            duration: 3000
+        });
+
+    }
 }
+

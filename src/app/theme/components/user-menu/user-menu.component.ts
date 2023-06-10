@@ -14,7 +14,7 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     user: any
 
     constructor(public appService: AppService,
-                private authService: AuthService) {
+                public authService: AuthService) {
     }
 
     ngOnInit() {
@@ -22,7 +22,6 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log(this.authService.getUser())
         if (this.authService.getUser()) {
             this.user = this.authService.getUser()
             this.isConnected = true;

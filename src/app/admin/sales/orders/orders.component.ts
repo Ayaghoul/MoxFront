@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { OrderDetailsDialogComponent } from 'src/app/shared/order-details-dialog/order-details-dialog.component';
+import {CartService} from "../../../core/services/cart.service";
 
 @Component({
   selector: 'app-orders',
@@ -24,10 +25,11 @@ export class OrdersComponent implements OnInit {
     { id: 2, name: 'Refunded' },
     { id: 2, name: 'Pending' }
   ];
-  constructor(public appService:AppService, public snackBar: MatSnackBar) { }
+  constructor(public appService:AppService, public snackBar: MatSnackBar,
+              private cartService:CartService) { }
 
   ngOnInit(): void {
-    this.appService.getOrders().subscribe((orders:Order[]) => { 
+    this.cartService.getAllCarts().subscribe((orders:any) => {
       this.initDataSource(orders);
     });  
   }

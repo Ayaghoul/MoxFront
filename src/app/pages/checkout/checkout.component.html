@@ -11,8 +11,7 @@
                 </mat-card> 
                 <form [formGroup]="checkoutForm"> 
                     <mat-accordion  hideToggle>
-
-                        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" [disabled]="orderCompleted">    
+                        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" [disabled]="orderCompleted">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <mat-icon *ngIf="checkoutForm.get('deliveryAddress')!.valid" color="primary">check_circle</mat-icon>
@@ -311,19 +310,19 @@
                                             <div class="mat-mdc-cell"><a [routerLink]="['/menu', item.id]" class="menu-item-name">{{item.name}}</a></div>
                                             <div class="mat-mdc-cell price">  
                                                 <span *ngIf="!item.discount" class="primary-color py-3"> 
-                                                    {{item.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                                                    {{item.price | currency : 'TND' : 'symbol' : '1.2-2'}}
                                                 </span> 
                                                 <span *ngIf="item.discount" class="primary-color py-3">  
-                                                    {{ (item.price - (item.price * (item.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}
+                                                    {{ (item.price - (item.price * (item.discount / 100))) | currency : 'TND' : 'symbol' : '1.2-2'}}
                                                 </span>  
                                             </div>      
                                             <div class="mat-mdc-cell quantity">{{item.cartCount}}</div>
                                             <div class="mat-mdc-cell total">
                                                 <span *ngIf="!item.discount" class="primary-color py-3"> 
-                                                    {{item.price*item.cartCount | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                                                    {{item.price*item.cartCount | currency : 'TND' : 'symbol' : '1.2-2'}}
                                                 </span> 
                                                 <span *ngIf="item.discount" class="primary-color py-3">   
-                                                    {{ (item.price - (item.price * (item.discount / 100)))*item.cartCount | currency : 'USD' : 'symbol' : '1.2-2'}}
+                                                    {{ (item.price - (item.price * (item.discount / 100)))*item.cartCount | currency : 'TND' : 'symbol' : '1.2-2'}}
                                                 </span>  
                                             </div> 
                                         </div> 
@@ -333,16 +332,12 @@
                                             <div class="mat-mdc-cell price"></div>
                                             <div class="mat-mdc-cell quantity text-right">
                                             <div fxLayout="column" fxLayoutAlign="center end" class="grand-total px-2">
-                                                <span>SubTotal:</span>
-                                                <span class="text-muted">Discount:</span>
                                                 <span>Grand total:</span>
                                             </div>        
                                             </div>
                                             <div class="mat-mdc-cell total">
                                                 <div fxLayout="column" fxLayoutAlign="center start" class="grand-total">
-                                                    <span>{{ appService.Data.totalPrice | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
-                                                    <span class="text-muted">15%</span>
-                                                    <span class="primary-color">{{ (appService.Data.totalPrice - (appService.Data.totalPrice*0.15)) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
+                                                    <span>{{ appService.Data.totalPrice | currency : 'TND' : 'symbol' : '1.2-2'}}</span>
                                                 </div>
                                             </div> 
                                         </div>
@@ -397,15 +392,15 @@
                         <div class="divider my-3"></div>
                         <div *ngFor="let menuItem of appService.Data.cartList" fxLayout="row" fxLayoutAlign="space-between start" class="mb-3">
                             <div fxLayout="row" fxLayoutAlign="start start">
-                                <img [src]="menuItem.image.small" width="60" alt="item"> 
+                                <img [src]="imgUrl+menuItem.image" width="60" alt="item">
                                 <a [routerLink]="['/menu', menuItem.id]" class="menu-item-name px-2">{{menuItem.name}}</a>
                             </div>
                             <div fxLayout="column" fxLayoutAlign="end end">
                                 <span *ngIf="!menuItem.discount" class="fw-500"> 
-                                    {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                                    {{menuItem.price | currency : 'TND' : 'symbol' : '1.2-2'}}
                                 </span> 
                                 <span *ngIf="menuItem.discount" class="fw-500">  
-                                    {{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}
+                                    {{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'TND' : 'symbol' : '1.2-2'}}
                                 </span> 
                                 <small class="text-muted ws-nowrap fw-500">Qty: {{menuItem.cartCount}}</small>
                             </div>  
@@ -420,15 +415,11 @@
                         </div>
                         <div fxLayout="row" fxLayoutAlign="space-between start" class="divider pt-2">
                             <div fxLayout="column" fxLayoutAlign="start start">
-                                <span>SubTotal:</span>
-                                <span class="text-muted">Discount:</span>
                                 <h3>Grand total:</h3>
                             </div>
                             <div fxLayout="column" fxLayoutAlign="end end"> 
-                                <span>{{appService.Data.totalPrice | currency : 'USD' : 'symbol' : '1.2'}}</span> 
-                                <span class="text-muted">15%</span>
-                                <h3 class="primary-color">{{ (appService.Data.totalPrice - (appService.Data.totalPrice*0.15)) | currency : 'USD' : 'symbol' : '1.2-2'}}</h3> 
-                            </div> 
+                                <span>{{appService.Data.totalPrice | currency : 'TND' : 'symbol' : '1.2'}}</span>
+                            </div>
                         </div> 
                         <button mat-raised-button color="primary" type="button" class="mt-2 w-100" [disabled]="!appService.Data.cartList.length" (click)="placeOrder()">Place Order Now</button>           
                     </mat-card>

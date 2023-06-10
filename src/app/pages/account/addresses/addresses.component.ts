@@ -18,7 +18,7 @@ export class AddressesComponent implements OnInit {
     'middleName': '', 
     'company': '',
     'email': 'emilio.verdines@gmail.com',
-    'phone': '(+100) 123 456 7890', 
+    'phone': '(216) 73 370 330',
     'country': 'US',
     'city': 'New York',
     'place': 'Brooklyn',

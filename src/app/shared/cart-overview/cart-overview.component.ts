@@ -4,6 +4,7 @@ import { MenuItem } from 'src/app/app.models';
 import { Settings, AppSettings } from 'src/app/app.settings';
 import { AppService } from 'src/app/app.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-cart-overview',
@@ -12,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CartOverviewComponent implements OnInit {
   public menuItems: MenuItem[] = [];
+  imgUrl = environment.apiImg;
   public settings: Settings;
   constructor(public appService:AppService, 
               public appSettings:AppSettings,
@@ -49,12 +51,12 @@ export class CartOverviewComponent implements OnInit {
 
   public counterChange(menuItem:MenuItem, count:number){   
     menuItem.cartCount = count;
-    if(menuItem.cartCount <= menuItem.availibilityCount){ 
+    if(menuItem.cartCount <= menuItem.availableCount){
       this.appService.calculateCartTotal();
     }
     else{
-      menuItem.cartCount = menuItem.availibilityCount;
-      this.snackBar.open('You can not add more items than available. In stock ' + menuItem.availibilityCount + ' items and you already added ' + menuItem.cartCount + ' item to your cart', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
+      menuItem.cartCount = menuItem.availableCount;
+      this.snackBar.open('You can not add more items than available. In stock ' + menuItem.availableCount + ' items and you already added ' + menuItem.cartCount + ' item to your cart', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
     } 
   }
  

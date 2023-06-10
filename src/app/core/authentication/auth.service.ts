@@ -87,7 +87,7 @@ export class AuthService {
             }))
     }
 
-    public getUser(): string | null {
+    public getUser(): any | null {
         // @ts-ignore
         return JSON.parse(localStorage.getItem(environment.connectedUser));
     }

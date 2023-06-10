@@ -7,7 +7,7 @@
         <mat-toolbar color="primary">
             <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info">
                 <img [src]="userImage" alt="user-image" width="80" class="mat-elevation-z6">
-                <p class="mb-0">Emilio Verdines <br> <small>General Manager</small></p>
+                <p class="mb-0">{{user?.username}}</p>
             </div>  
         </mat-toolbar>
         <a mat-menu-item routerLink="/admin"> 
@@ -31,7 +31,7 @@
             <span>Help</span> 
         </a>
         <div class="divider"></div>
-        <a mat-menu-item routerLink="/login"> 
+        <a mat-menu-item (click)="logout()">
             <mat-icon>power_settings_new</mat-icon>
             <span>Log out</span> 
         </a>

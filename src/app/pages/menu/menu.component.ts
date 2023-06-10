@@ -6,6 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { MenuItem, Pagination } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { AppSettings, Settings } from 'src/app/app.settings';
+import {MenuItemService} from "../../core/services/menu-item.service";
 
 @Component({
   selector: 'app-menu',
@@ -29,7 +30,10 @@ export class MenuComponent implements OnInit {
   public watcher: Subscription;
   public settings: Settings;
 
-  constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver) {
+  constructor(public appSettings:AppSettings,
+              private menuItemService:MenuItemService,
+              public appService:AppService,
+              public mediaObserver: MediaObserver) {
     this.settings = this.appSettings.settings; 
     this.watcher = mediaObserver.asObservable()
     .pipe(filter((changes: MediaChange[]) => changes.length > 0), map((changes: MediaChange[]) => changes[0]))
@@ -86,7 +90,7 @@ export class MenuComponent implements OnInit {
   }
 
   public getMenuItems(){
-    this.appService.getMenuItems().subscribe(data => {
+    this.menuItemService.getAllMenuItems().subscribe(data => {
       // this.menuItems = this.appService.shuffleArray(data);
       // this.menuItems = data;
       let result = this.filterData(data); 

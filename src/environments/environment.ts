@@ -5,12 +5,15 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/',
+  apiImg: 'http://localhost:8080/',
   token:'token',
   users:'users',
   ExpiresIn:'ExpiresIn',
   connectedUser:'connectedUser',
   categories: "categories",
-  menuItems: "menuItems"
+  menuItems: "menuItems",
+  reservations: "reservations",
+  carts: "carts"
 };
 
 /*

@@ -17,7 +17,7 @@ export class HorizontalMenuComponent implements OnInit {
     user: any;
 
     constructor(public menuService: MenuService,
-                private auth: AuthService) {
+                public auth: AuthService) {
     }
 
     ngOnInit() {

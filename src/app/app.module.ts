@@ -41,6 +41,7 @@ import {LockScreenComponent} from './pages/lock-screen/lock-screen.component';
 import {AuthService} from "./core/authentication/auth.service";
 import {AuthInterceptors} from "./core/interceptors/auth-interceptors";
 import {AuthGuard} from "./core/guards/auth-guard.service";
+import {UsersService} from "./admin/users/users.service";
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import {AuthGuard} from "./core/guards/auth-guard.service";
     providers: [
         AppSettings,
         AuthService,
+        UsersService,
         AuthGuard,
         {provide: OverlayContainer, useClass: CustomOverlayContainer},
         {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},

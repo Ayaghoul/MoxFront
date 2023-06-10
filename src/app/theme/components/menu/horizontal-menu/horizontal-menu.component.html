@@ -1,5 +1,5 @@
 <ng-container *ngFor="let menuItem of menuItems">
-    <a *ngIf="menuItem.routerLink && !menuItem.hasSubMenu &&  isAdmin(user?.roles, menuItem.role)  " mat-button
+    <a *ngIf="menuItem.routerLink && !menuItem.hasSubMenu &&  isAdmin(auth.getUser()?.roles, menuItem.role)  " mat-button
 
        [routerLink]="[menuItem.routerLink]"
        routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">

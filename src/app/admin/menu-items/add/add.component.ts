@@ -2,11 +2,12 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {UntypedFormGroup, UntypedFormBuilder, Validators} from '@angular/forms';
 import {AppService} from 'src/app/app.service';
 import {MenuItem} from 'src/app/app.models';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {isPlatformBrowser} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {CategoriesService} from "../../../core/services/categories.service";
 import {MenuItemService} from "../../../core/services/menu-item.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-add',
@@ -19,8 +20,10 @@ export class AddComponent implements OnInit {
     public id: any;
     public showImage: boolean = false;
     public selectedImage: File | null = null;
+    imgUrl = environment.apiImg;
 
     constructor(
+        private router: Router,
         public appService: AppService,
         public categoriesService: CategoriesService,
         public menuItemService: MenuItemService,
@@ -37,7 +40,7 @@ export class AddComponent implements OnInit {
             "price": [null, Validators.required],
             "image": null,
             "discount": null,
-            "availibilityCount": null,
+            "availableCount": null,
             "weight": null,
             "isVegetarian": false,
             "categoryId": [null, Validators.required]
@@ -46,7 +49,7 @@ export class AddComponent implements OnInit {
         this.sub = this.activatedRoute.params.subscribe(params => {
             if (params['id']) {
                 this.id = params['id'];
-                //     this.getMenuItemById();
+                this.getMenuItemById();
             } else {
                 this.showImage = true;
             }
@@ -65,18 +68,24 @@ export class AddComponent implements OnInit {
         });
     }
 
-    /*  public getMenuItemById(){
-       this.appService.getMenuItemById(this.id).subscribe((menuItem:MenuItem)=>{
-         this.form.patchValue(menuItem);
-         if (isPlatformBrowser(this.platformId)) {
-           this.appService.convertImgToBase64(menuItem.image.medium, (dataUrl:string) => {
-             this.showImage = true;
-             this.form.controls.image.patchValue(dataUrl.toString());
-           })
-         }
-       });
-     }
-   */
+    public getMenuItemById() {
+        this.menuItemService.getMenuItemById(this.id).subscribe((menuItem: MenuItem) => {
+            this.form.patchValue(menuItem);
+                this.showImage = true;
+            this.form.patchValue({
+                "name": menuItem.name,
+                "description": menuItem.description,
+                "price": menuItem.price ,
+                "discount": menuItem.discount ,
+                "availableCount": menuItem.availableCount ,
+                "weight": menuItem.weight ,
+                "isVegetarian": menuItem.isVegetarian ,
+                "categoryId": menuItem.categoryId
+            });
+                this.form.controls.image.patchValue(menuItem.image);
+        });
+    }
+
 
     public onImageChange(event: Event): void {
         const file = (event.target as HTMLInputElement).files?.[0];
@@ -89,11 +98,13 @@ export class AddComponent implements OnInit {
     public onSubmit() {
         const fd = new FormData();
         fd.append("photo", this.selectedImage);
-        fd.append("category", this.form.get('categoryId').value);
+        fd.append("categoryId", this.form.get('categoryId').value);
         fd.append("name", this.form.get('name').value);
         fd.append("description", this.form.get('description').value);
         fd.append("price", this.form.get('price').value);
-        fd.append("discount", this.form.get('discount').value);
+        fd.append("discountedPrice", this.form.get('discount').value);
+        fd.append("availableCount", this.form.get('availableCount').value);
+        fd.append("weight", this.form.get('weight').value);
         fd.append("name", this.form.get('name').value);
 
         if (this.selectedImage) {
@@ -105,6 +116,7 @@ export class AddComponent implements OnInit {
                     (response) => {
                         // The MenuItem was successfully added
                         console.log(response);
+                        this.router.navigateByUrl('/admin/menu-items/list')
                     },
                     (error) => {
                         // An error occurred while adding the MenuItem
@@ -118,7 +130,7 @@ export class AddComponent implements OnInit {
     }
 
 
-    /* uploadMenuItem(menu: MenuItem, image: File): void {
+     uploadMenuItem(menu: MenuItem, image: File): void {
        const formData = new FormData();
        formData.append('menu', JSON.stringify(menu));
        formData.append('im', image, image.name);
@@ -135,6 +147,6 @@ export class AddComponent implements OnInit {
            }
          );
      }
-    */
+
 
 } 

@@ -2,7 +2,8 @@ export class Restaurant {
     constructor(public id: number,
                 public name: string,
                 public address: string,
-                public phone: string){}
+                public phone: string) {
+    }
 }
 
 export class Employee {
@@ -13,36 +14,50 @@ export class Employee {
                 public middleName: string,
                 public email: string,
                 public phone: string,
-                public addresses: Address[], 
-                public position: Position){}
+                public addresses: Address[],
+                public position: Position) {
+    }
 }
 
 //['General Manager','Assistant Manager'] ... https://aptito.com/blog/restaurant-positions-and-descriptions
 export class Position {
     constructor(public id: number,
-                public name: string){}
+                public name: string) {
+    }
 }
 
 export class Address {
     constructor(public id: number,
-                public country: Country, 
+                public country: Country,
                 public city: string,
                 public place: string,
                 public postalCode: string,
-                public addressLine: string){}
+                public addressLine: string) {
+    }
 }
 
 export class Country {
     constructor(public name: string,
-                public code: string){}
+                public code: string) {
+    }
 }
 
 export class Customer {
     constructor(public id: number,
-                public fullName: string, 
+                public fullName: string,
                 public email: string,
                 public phoneNumber: string,
-                public address: string){}
+                public address: string) {
+    }
+}
+
+export class User {
+    constructor(public id?: number,
+                public username?: string,
+                public email?: string,
+                public phoneNumber?: string,
+                public address?: string) {
+    }
 }
 
 export class Reservation {
@@ -50,17 +65,19 @@ export class Reservation {
                 public date: string,
                 public time: string,
                 public customer: Customer,
-                public guests: number,
+                public user: User,
                 public tableNumber: number,
-                public status: ReservationStatus){}
-} 
+                public status: ReservationStatus) {
+    }
+}
 
 // Approved, Cancelled, Pending
 export class ReservationStatus {
     constructor(public id: number,
-                public name: string){}
+                public name: string) {
+    }
 }
- 
+
 
 export class Order {
     constructor(public id: number,
@@ -68,13 +85,15 @@ export class Order {
                 public items: MenuItem[],
                 public quantity: number,
                 public amount: number,
-                public status: OrderStatus){}
-}  
+                public status: OrderStatus) {
+    }
+}
 
 //Completed, Processing, On Hold, Refunded, Pending
 export class OrderStatus {
     constructor(public id: number,
-                public name: string){}
+                public name: string) {
+    }
 }
 
 export class MenuItem {
@@ -86,20 +105,30 @@ export class MenuItem {
                 public discount: number,
                 public ratingsCount: number,
                 public ratingsValue: number,
-                public availibilityCount: number,
+                public availableCount: number,
                 public cartCount: number,
                 public weight: number,
                 public isVegetarian: boolean,
-                public categoryId: number){}
+                public categoryId: number,
+                public category: Category,
+    ) {
+    }
 }
-
 
 
 export class Category {
     constructor(public id: number,
                 public name: string,
-                public description: string){ }
-}   
+                public description: string) {
+    }
+}
+
+export class Cart {
+    constructor(public id: number,
+                public customer: User,
+                public items: MenuItem[]) {
+    }
+}
 
 export class Pagination {
     constructor(public page: number,
@@ -107,6 +136,7 @@ export class Pagination {
                 public prePage: number | null,
                 public nextPage: number | null,
                 public total: number,
-                public totalPages: number){ }
+                public totalPages: number) {
+    }
 }
 

@@ -4,10 +4,10 @@
             <mat-chip-option color="warn" highlighted selectable="false">{{menuItem.discount}}% OFF</mat-chip-option>
         </mat-chip-listbox> 
         <div *ngIf="lazyLoad">
-            <img [attr.data-src]="menuItem.image.medium" class="w-100 d-block swiper-lazy">
+            <img [attr.data-src]="imgUrl+menuItem.image" class="w-100 d-block swiper-lazy">
             <div class="swiper-lazy-preloader"></div>  
         </div>  
-        <img *ngIf="!lazyLoad" [src]="menuItem.image.medium" class="w-100 d-block">  
+        <img *ngIf="!lazyLoad" [src]="imgUrl+menuItem.image" class="w-100 d-block">
     </div>  
     <div fxFlex="100" class="p-3"> 
         <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
@@ -31,10 +31,10 @@
                         <span class="fw-500">{{ ( appService.Data.categories | filterById : menuItem.categoryId )?.name }}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center" class="mb-1">
-                        <mat-icon color="primary" class="mat-icon-sm">{{ (menuItem.availibilityCount > 0) ? 'check_circle' : 'unpublished'}}</mat-icon>
+                        <mat-icon color="primary" class="mat-icon-sm">{{ (menuItem.availableCount > 0) ? 'check_circle' : 'unpublished'}}</mat-icon>
                         <span class="px-1">Availibility:</span>
                         <span class="dots"></span>
-                        <span class="fw-500">{{ (menuItem.availibilityCount > 0) ? 'Available':'Unavailable'}}</span>
+                        <span class="fw-500">{{ (menuItem.availableCount > 0) ? 'Available':'Unavailable'}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center" class="mb-1">
                         <span fxLayout="row" fxLayoutAlign="start center">
@@ -70,17 +70,17 @@
                 <div fxLayout="row" fxLayoutAlign="space-between center" class="divider mt-1"> 
 
                     <h2 *ngIf="!menuItem.discount" class="primary-color"> 
-                        {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                        {{menuItem.price | currency : 'TND' : 'symbol' : '1.2-2'}}
                     </h2> 
                     <h2 *ngIf="menuItem.discount">  
-                        <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
-                        <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
+                        <span class="text-muted old-price">{{menuItem.price | currency : 'TND' : 'symbol' : '1.2-2'}}</span>
+                        <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'TND' : 'symbol' : '1.2-2'}}</span>
                     </h2> 
 
 
-                    <div class="text-muted">  
-                        <button mat-icon-button [disabled]="onFavorites()" (click)="addToFavorites()" matTooltip="Add To Favorite">
-                            <mat-icon>favorite_border</mat-icon>
+                    <div class="text-muted">
+                        <button mat-icon-button [disabled]="onFavorites()"  (click)="addToFavorites()" matTooltip="Add To Favorite">
+                            <mat-icon>{{onFavorites()?'favorite':'favorite_border'}}</mat-icon>
                         </button>
                         <button mat-icon-button [disabled]="onCart()" (click)="addToCart()" matTooltip="Add To Cart">
                             <mat-icon>shopping_cart</mat-icon>

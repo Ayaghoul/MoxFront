@@ -1,7 +1,7 @@
 <mat-card class="p-0 o-hidden" *ngIf="menuItem">
     <div fxLayout="row wrap"> 
         <div fxFlex="100" fxFlex.gt-sm="40" class="p-0"> 
-            <img [src]="menuItem.image.big" alt="menu-image" class="mw-100 d-block">
+            <img [src]="imgUrl+menuItem.image" alt="menu-image" class="mw-100 d-block">
         </div> 
         <div fxFlex="100" fxFlex.gt-sm="60" class="py-3" [ngClass.gt-sm]="(settings.rtl) ? 'pr-5' : 'pl-5'" ngClass.sm="px-3" ngClass.xs="px-3"> 
             <div class="today-menu"> 
@@ -13,11 +13,11 @@
                     <span class="mx-2 text-muted">({{menuItem.ratingsCount}} Customer Reviews)</span>
                 </div> 
                 <h1 *ngIf="!menuItem.discount" class="primary-color py-3"> 
-                    {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                    {{menuItem.price | currency : 'TND' : 'symbol' : '1.2-2'}}
                 </h1> 
                 <h1 *ngIf="menuItem.discount" class="py-3">  
-                    <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
-                    <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
+                    <span class="text-muted old-price">{{menuItem.price | currency : 'TND' : 'symbol' : '1.2-2'}}</span>
+                    <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'TND' : 'symbol' : '1.2-2'}}</span>
                 </h1> 
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <app-quantity-counter [value]="menuItem.cartCount" [step]="1" [min]="1" [max]="1000" (onCounterChange)="counterChange($event)"></app-quantity-counter>
@@ -33,9 +33,9 @@
                         <span class="fw-500">{{ ( appService.Data.categories | filterById : menuItem.categoryId )?.name }}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center" class="mb-1">
-                        <mat-icon color="primary" class="mat-icon-sm">{{ (menuItem.availibilityCount > 0) ? 'check_circle' : 'unpublished'}}</mat-icon>
+                        <mat-icon color="primary" class="mat-icon-sm">{{ (menuItem.availableCount > 0) ? 'check_circle' : 'unpublished'}}</mat-icon>
                         <span class="px-1">Availibility:</span> 
-                        <span class="fw-500">{{ (menuItem.availibilityCount > 0) ? 'Available':'Unavailable'}}</span>
+                        <span class="fw-500">{{ (menuItem.availableCount > 0) ? 'Available':'Unavailable'}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center" class="mb-1">
                         <span fxLayout="row" fxLayoutAlign="start center">

@@ -1,4 +1,4 @@
-<ng-container *ngIf="isConnected else logOut">
+<ng-container *ngIf="authService.getUser() else logOut">
 
     <a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger"
     >

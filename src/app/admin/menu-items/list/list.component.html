@@ -8,41 +8,43 @@
     </div>
     <mat-divider></mat-divider>
 
-    <div class="table-wrapper"> 
-        <table  class="w-100">
-        
+    <div class="table-wrapper">
+        <table class="w-100">
+
             <!-- ID Column -->
-                <th > ID </th>            
+            <th> ID</th>
             <!-- Image Column -->
-                <th > Image </th>
+            <th> Image</th>
             <!-- Category Column -->
-                <th > Category </th>
+            <th> Category</th>
             <!-- Name Column -->
-                <th > Name </th>
+            <th> Name</th>
             <!-- Price Column -->
-                <th > Price </th>
-            <!-- Discount Column -->
-                <th > Discount </th>
-            <!-- Availibility Count Column -->
-                <th > Availibility Count </th>
+            <th> Price</th>
             <!-- Is Vegetarian Column -->
-                <th > Is Vegetarian </th>
-                <tbody> 
-                <tr *ngFor="let menu of menuItem">
+            <th> Is Vegetarian</th>
+            <th>Actions</th>
+            <tbody>
+            <tr *ngFor="let menu of menuItem">
                 <td>{{menu.id}}</td>
 
                 <td style="max-width: 100px; height: 100px;">
-                    <img [src]="getImagebased64(menu.image)" style="width: 100px; height: 100px;">
-                  </td>                
-                <td>vvvv</td>
+                    <img [src]="imgUrl+menu?.image" style="width: 100px; height: 100px;">
+                </td>
+                <td>{{menu?.category?.name}}</td>
                 <td>{{menu.name}}</td>
                 <td>{{menu.price}}</td>
-                <td>{{menu.discount}}</td>
-                <td>{{menu.availibilityCount}}</td>
                 <td>{{menu.isVegetarian}}</td>
-
+                <td >
+                    <button mat-icon-button color="primary" [routerLink]="['/admin/menu-items/add/'+menu?.id]" matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="remove(menu)" matTooltip="Remove">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
             </tr>
-                </tbody>
-        </table> 
+            </tbody>
+        </table>
     </div>
 </mat-card>

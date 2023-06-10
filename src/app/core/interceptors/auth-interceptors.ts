@@ -23,7 +23,7 @@ export class AuthInterceptors implements HttpInterceptor {
         });
         return next.handle(request)
             .pipe(
-                catchError((error: HttpErrorResponse) => {
+                catchError((error: any) => {
                     console.log(error);
                     let errorMsg = '';
                     if (error.error instanceof ErrorEvent) {
@@ -31,7 +31,7 @@ export class AuthInterceptors implements HttpInterceptor {
                         errorMsg = `Error: ${error.error.message}`;
                     } else if (error?.error?.stack?.startsWith('JsonWebTokenError')
                         || error?.error?.stack?.startsWith('TokenExpiredError')
-                        || error?.error.includes('TokenExpiredException') ) {
+                        || error?.error?.includes('TokenExpiredException') ) {
                         console.log('Votre session est expirée');
                         this.auth.logout();
                         errorMsg = `Error: ${error.error.message}`;

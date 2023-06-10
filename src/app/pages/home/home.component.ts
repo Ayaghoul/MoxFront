@@ -1,53 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { Settings, AppSettings } from 'src/app/app.settings';
-import { AppService } from 'src/app/app.service';  
-import { MenuItem } from 'src/app/app.models';
+import {Component, OnInit} from '@angular/core';
+import {Settings, AppSettings} from 'src/app/app.settings';
+import {AppService} from 'src/app/app.service';
+import {MenuItem} from 'src/app/app.models';
+import {MenuItemService} from "../../core/services/menu-item.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {  
-  public slides = []; 
-  public specialMenuItems:Array<MenuItem> = [];
-  public bestMenuItems:Array<MenuItem> = [];
-  public todayMenu!:MenuItem;
+export class HomeComponent implements OnInit {
+    public slides = [];
+    public specialMenuItems: Array<MenuItem> = [];
+    public bestMenuItems: Array<MenuItem> = [];
+    public menuItems: Array<MenuItem> = [];
+    public todayMenu!: MenuItem;
 
-  public settings: Settings;
-  constructor(public appSettings:AppSettings, public appService:AppService ) {
-    this.settings = this.appSettings.settings;  
-  }
+    public settings: Settings;
 
-  ngOnInit(): void {
-    this.getSlides();
-    this.getSpecialMenuItems();
-    this.getBestMenuItems();
-    this.getTodayMenu();
-  }
+    constructor(public appSettings: AppSettings, public appService: AppService,
+                private menuItemService: MenuItemService) {
+        this.settings = this.appSettings.settings;
+    }
 
-  public getSlides(){
-    this.appService.getHomeCarouselSlides().subscribe((res:any)=>{
-      this.slides = res;
-    });
-  }
- 
-  public getSpecialMenuItems(){
-    this.appService.getSpecialMenuItems().subscribe(menuItems=>{
-      this.specialMenuItems = menuItems;
-    });
-  } 
+    ngOnInit(): void {
+        this.menuItemService.getAllMenuItems().subscribe(res => {
+            this.menuItems = res;
+            this.specialMenuItems = this.menuItems.filter(item => item.isVegetarian);
+            console.log(this.specialMenuItems)
+            this.bestMenuItems = this.menuItems.filter(item => item.weight > 100);
+            console.log(this.bestMenuItems)
+            this.todayMenu = this.menuItems.filter(item => item.weight > 100)[0];
+            console.log(this.todayMenu)
 
-  public getBestMenuItems(){
-    this.appService.getBestMenuItems().subscribe(menuItems=>{
-      this.bestMenuItems = menuItems;
-    });
-  }
+        })
+        this.getSlides();
+    }
 
-  public getTodayMenu(){
-    this.appService.getMenuItemById(23).subscribe(data=>{ 
-      this.todayMenu = data;  
-    });
-  }  
+    public getSlides() {
+        this.appService.getHomeCarouselSlides().subscribe((res: any) => {
+            this.slides = res;
+        });
+    }
+
 
 }
