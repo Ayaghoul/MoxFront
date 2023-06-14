@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 import {CategoriesService} from "../../../core/services/categories.service";
 import {MenuItemService} from "../../../core/services/menu-item.service";
 import {environment} from "../../../../environments/environment";
+import {CartService} from "../../../core/services/cart.service";
 
 @Component({
     selector: 'app-add',
@@ -21,11 +22,12 @@ export class AddComponent implements OnInit {
     public showImage: boolean = false;
     public selectedImage: File | null = null;
     imgUrl = environment.apiImg;
-
+chefs:any
     constructor(
         private router: Router,
         public appService: AppService,
         public categoriesService: CategoriesService,
+        public cartService: CartService,
         public menuItemService: MenuItemService,
         public formBuilder: UntypedFormBuilder,
         private activatedRoute: ActivatedRoute,
@@ -43,9 +45,11 @@ export class AddComponent implements OnInit {
             "availableCount": null,
             "weight": null,
             "isVegetarian": false,
-            "categoryId": [null, Validators.required]
+            "categoryId": [null, Validators.required],
+            "chefId": [null, Validators.required]
         });
         this.getCategories();
+        this.getChefs();
         this.sub = this.activatedRoute.params.subscribe(params => {
             if (params['id']) {
                 this.id = params['id'];
@@ -65,6 +69,11 @@ export class AddComponent implements OnInit {
     public getCategories() {
         this.categoriesService.getAllCategories().subscribe(categories => {
             this.appService.Data.categories = categories;
+        });
+    }
+    public getChefs() {
+        this.cartService.getAllChefs().subscribe(res => {
+            this.chefs = res;
         });
     }
 
@@ -106,6 +115,7 @@ export class AddComponent implements OnInit {
         fd.append("availableCount", this.form.get('availableCount').value);
         fd.append("weight", this.form.get('weight').value);
         fd.append("name", this.form.get('name').value);
+        fd.append("chefId", this.form.get('chefId').value);
 
         if (this.selectedImage) {
             const reader = new FileReader();

@@ -27,7 +27,18 @@
                                 </mat-select>
                                 <mat-error *ngIf="form.controls.categoryId.errors?.required">Category is required</mat-error>
                             </mat-form-field>
-                        </div>  
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Category</mat-label>
+                                <mat-select formControlName="chefId" required>
+                                    <mat-option *ngFor="let chef of chefs" [value]="chef.id">
+                                        <span>{{chef.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Category is required</mat-error>
+                            </mat-form-field>
+                        </div>
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Price</mat-label>
