@@ -89,6 +89,16 @@ export class Order {
     }
 }
 
+export class Chef {
+    constructor(public idChef: number,
+                public description: string,
+                public ChefName: string,
+                public phoneNumber: number,
+                public email: string,
+                public menuItems: MenuItem[]) {
+    }
+}
+
 //Completed, Processing, On Hold, Refunded, Pending
 export class OrderStatus {
     constructor(public id: number,
