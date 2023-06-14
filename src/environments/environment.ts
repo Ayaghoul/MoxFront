@@ -13,7 +13,9 @@ export const environment = {
   categories: "categories",
   menuItems: "menuItems",
   reservations: "reservations",
-  carts: "carts"
+  carts: "carts",
+  orders: "orders",
+  chefs: "chefs"
 };
 
 /*

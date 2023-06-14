@@ -11,7 +11,7 @@
             <!-- Date Column -->
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                <td mat-cell *matCellDef="let order"> {{order.date}}</td>
+                <td mat-cell *matCellDef="let order"> {{order.date | date:'YYYY-MM-dd'}}</td>
             </ng-container>  
         
 
@@ -24,7 +24,7 @@
             <!-- Table Number Column -->
             <ng-container matColumnDef="total">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-                <td mat-cell *matCellDef="let order"> ${{order.amount}} for {{order.quantity}} items </td>
+                <td mat-cell *matCellDef="let order"> ${{order.amount}} for {{order.orderItems.length}} items </td>
             </ng-container> 
 
             <!-- Action Column -->

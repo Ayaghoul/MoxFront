@@ -19,7 +19,9 @@ export class CartService {
                 return throwError(err);
             }))
     }
-
+    getAllChefs() {
+        return this.http.get(`${environment.apiUrl}${environment.chefs}/get-all-chefs`)
+    }
     public editCart(id: number, carts: any) {
         return this.http.patch(`${environment.apiUrl}${environment.carts}/update-cart/${id}`, carts)
             .pipe(catchError(err => {
@@ -48,6 +50,13 @@ export class CartService {
         (`${environment.apiUrl}${environment.carts}/add-menu-item-cart`, items)
             .pipe(catchError(err => {
                 console.log(err)
+                return throwError(err);
+            }))
+    }
+
+    public deleteChef(chef: any) {
+        return this.http.delete(`${environment.apiUrl}${environment.chefs}/delete-chef/${chef?.id}`)
+            .pipe(catchError(err => {
                 return throwError(err);
             }))
     }

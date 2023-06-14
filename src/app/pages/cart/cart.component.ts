@@ -117,7 +117,7 @@ export class CartComponent implements OnInit {
 
         this.cartService.addMenuItemToCart(idList).subscribe(res=>{
 
-        this.router.navigateByUrl('/checkout');
+        this.router.navigateByUrl('/checkout/'+res?.id);
         });
     }
 }

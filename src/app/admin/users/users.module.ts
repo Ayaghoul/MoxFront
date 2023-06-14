@@ -7,12 +7,12 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
-import { UsersComponent } from './users.component';
+import { ChefsComponent } from './users.component';
 import { UsersData } from './users.data';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 
 export const routes: Routes = [
-  { path: '', component: UsersComponent, pathMatch: 'full' }
+  { path: '', component: ChefsComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -28,7 +28,7 @@ export const routes: Routes = [
     PipesModule    
   ],
   declarations: [
-    UsersComponent,
+    ChefsComponent,
     UserDialogComponent
   ] 
 })

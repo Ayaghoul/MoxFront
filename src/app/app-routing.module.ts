@@ -24,7 +24,7 @@ const routes: Routes = [
             {path: 'account', loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)},
             {path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)},
             {
-                path: 'checkout',
+                path: 'checkout/:idCart',
                 loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutModule)
             },
             {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},

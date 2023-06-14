@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { OrderDetailsDialogComponent } from 'src/app/shared/order-details-dialog/order-details-dialog.component';
+import {OrderService} from "../../../core/services/order.service";
 
 @Component({
   selector: 'app-orders',
@@ -16,10 +17,11 @@ export class OrdersComponent implements OnInit {
   dataSource!: MatTableDataSource<Order>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort ) sort!: MatSort;
-  constructor(public appService:AppService) { }
+  constructor(public appService:AppService,
+              private orderService:OrderService) { }
 
   ngOnInit(): void {
-    this.appService.getOrders().subscribe((res:Order[]) => { 
+    this.orderService.getOrderByUserId().subscribe((res:Order[]) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

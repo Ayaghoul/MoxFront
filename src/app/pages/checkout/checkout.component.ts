@@ -3,6 +3,8 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {AppService} from 'src/app/app.service';
 import {emailValidator, maxWordsValidator} from 'src/app/theme/utils/app-validators';
 import {environment} from "../../../environments/environment";
+import {OrderService} from "../../core/services/order.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-checkout',
@@ -23,7 +25,9 @@ export class CheckoutComponent implements OnInit {
     public orderEmail: string = '';
     imgUrl = environment.apiImg;
 
-    constructor(public appService: AppService, private fb: UntypedFormBuilder) {
+    constructor(public appService: AppService, private fb: UntypedFormBuilder,
+                private activatedRoute: ActivatedRoute,
+                private orderService: OrderService) {
     }
 
     ngOnInit(): void {
@@ -48,19 +52,28 @@ export class CheckoutComponent implements OnInit {
                 'place': [null, Validators.required],
                 'postalCode': [null, Validators.required],
                 'address': [null, Validators.required],
+                'cartId': [null],
             }),
-            deliveryMethod: this.fb.group({
-                'method': [null, Validators.required]
-            }),
-            paymentMethod: this.fb.group({
-                'cardHolderName': [null, Validators.required],
-                'cardNumber': [null, Validators.required],
-                'expiredMonth': [null, Validators.required],
-                'expiredYear': [null, Validators.required],
-                'cvv': [null, Validators.compose([Validators.required, Validators.minLength(3)])]
-            })
-        });
 
+            // deliveryMethod: this.fb.group({
+            //     'method': [null, Validators.required]
+            // }),
+            // paymentMethod: this.fb.group({
+            //     'cardHolderName': [null, Validators.required],
+            //     'cardNumber': [null, Validators.required],
+            //     'expiredMonth': [null, Validators.required],
+            //     'expiredYear': [null, Validators.required],
+            //     'cvv': [null, Validators.compose([Validators.required, Validators.minLength(3)])]
+            // })
+        });
+        this.activatedRoute.params.subscribe(res => {
+            console.log(res)
+            this.checkoutForm.patchValue({
+                deliveryAddress: {
+                    cartId: res.idCart
+                }
+            });
+        })
     }
 
     @HostListener('window:resize')
@@ -94,13 +107,17 @@ export class CheckoutComponent implements OnInit {
         this.checkoutForm.updateValueAndValidity();
         this.checkoutForm.markAllAsTouched();
         if (this.checkoutForm.valid) {
-            this.step = 4;
-            this.orderCompleted = true;
-            this.orderEmail = (this.checkoutForm.get('deliveryAddress') as any)['controls'].email.value;
-            this.checkoutForm.reset();
-            this.appService.Data.cartList.length = 0;
-            this.appService.Data.totalPrice = 0;
-            this.appService.Data.totalCartCount = 0;
+            this.orderService.placeOrder(this.checkoutForm.value.deliveryAddress, this.checkoutForm.value.deliveryAddress.cartId).subscribe(res => {
+                console.log(res)
+                this.step = 4;
+                this.orderCompleted = true;
+                this.orderEmail = (this.checkoutForm.get('deliveryAddress') as any)['controls'].email.value;
+                this.checkoutForm.reset();
+                this.appService.Data.cartList.length = 0;
+                this.appService.Data.totalPrice = 0;
+                this.appService.Data.totalCartCount = 0;
+            })
+
         }
     }
 
