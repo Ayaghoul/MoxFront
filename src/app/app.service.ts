@@ -197,9 +197,13 @@ export class AppService {
     return value; 
   } 
 
-  public filterData(data:any, categoryId:number, sort?:string, page?:number, perPage?:number){  
+  public filterData(data:any, categoryId:number, sort?:string, page?:number, perPage?:number){
+      console.log(categoryId)
     if(categoryId){
-      data = data.filter((item:any) => item.categoryId == categoryId);
+      data = data.filter((item:any) => {
+          console.log(item)
+          return  item.category.id == categoryId
+      });
     }   
 
     //for show more properties mock data 

@@ -117,6 +117,8 @@ export class MenuComponent implements OnInit {
   }
 
   public filterData(data:any){
+    console.log(this.selectedCategoryId)
+    console.log(data)
     return this.appService.filterData(data, this.selectedCategoryId, this.sort, this.pagination.page, this.pagination.perPage);
   }
   // public filterData(data){
