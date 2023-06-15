@@ -32,7 +32,6 @@ export class MenuItemComponent implements OnInit {
 
     getAlLFavorties() {
         this.usersService.getFavorites().subscribe(res => {
-            console.log(res);
             this.favorites = res;
         })
 

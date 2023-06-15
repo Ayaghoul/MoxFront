@@ -114,7 +114,7 @@ export class CartComponent implements OnInit {
 
     checkout() {
         const idList: number[] = this.appService.Data.cartList.map(obj => obj.id);
-
+        console.log(idList)
         this.cartService.addMenuItemToCart(idList).subscribe(res=>{
 
         this.router.navigateByUrl('/checkout/'+res?.id);

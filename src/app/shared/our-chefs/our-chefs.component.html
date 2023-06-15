@@ -9,14 +9,14 @@
                     <div class="swiper-wrapper h-100">      
                         <div *ngFor="let chef of chefs" class="swiper-slide"> 
                             <mat-card>
-                                <img mat-card-image [attr.data-src]="chef.image" alt="" class="swiper-lazy d-block">
+                                <img mat-card-image    src="assets/images/others/user.jpg"
+                             alt="" class="swiper-lazy d-block">
                                 <div class="swiper-lazy-preloader"></div>
                                 <mat-card-content class="text-center p-3">
-                                    <h2 class="secondary-font fw-600">{{chef.fullName}}</h2>
-                                    <p class="mb-2">{{chef.position}}</p>  
-                                    <div fxLayout="row" fxLayoutAlign="center center">
-                                        <app-rating [ratingsCount]="chef.ratingsCount" [ratingsValue]="chef.ratingsValue"></app-rating>
-                                    </div> 
+                                    <h2 class="secondary-font fw-600">{{chef.chefName}}</h2>
+<!--                                    <div fxLayout="row" fxLayoutAlign="center center">-->
+<!--                                        <app-rating [ratingsCount]="chef.ratingsCount" [ratingsValue]="chef.ratingsValue"></app-rating>-->
+<!--                                    </div> -->
                                 </mat-card-content>
                                 <mat-divider></mat-divider>
                                 <mat-card-actions fxLayoutAlign="space-between center">
@@ -63,4 +63,4 @@
             </div>  
         </div>
     </div>   
-</div>  
+</div>

@@ -41,6 +41,10 @@ export class MenuItemService {
                 return throwError(err);
             }))
     }
+    public rateMenuItem(id: number,rating): Observable<MenuItem> {
+        return this.http.patch<MenuItem>(`${environment.apiUrl}${environment.menuItems}/rate-menu-item/${id}?rating=${rating}`,null)
+
+    }
 
     public deleteMenu(menuItem: MenuItem): Observable<MenuItem> {
         return this.http.delete<MenuItem>(`${environment.apiUrl}${environment.menuItems}/delete-menu-item/${menuItem?.id}`)
