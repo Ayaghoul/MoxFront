@@ -68,7 +68,7 @@
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">location_on</mat-icon>
-                            <span>{{user.description}}</span>
+                            <span>{{user.description | slice:0:20}}</span>
                         </p>
 
                     </div>

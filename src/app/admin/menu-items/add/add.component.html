@@ -30,13 +30,13 @@
                         </div>
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Category</mat-label>
+                                <mat-label>Chef</mat-label>
                                 <mat-select formControlName="chefId" required>
                                     <mat-option *ngFor="let chef of chefs" [value]="chef.id">
-                                        <span>{{chef.name}}</span>
+                                        <span>{{chef.chefName}}</span>
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Category is required</mat-error>
+                                <mat-error *ngIf="form.controls.chefId.errors?.required">Category is required</mat-error>
                             </mat-form-field>
                         </div>
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
@@ -46,18 +46,8 @@
                                 <mat-error *ngIf="form.controls.price.errors?.required">Price is required</mat-error>
                             </mat-form-field>
                         </div> 
-                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Discount</mat-label>
-                                <input matInput formControlName="discount" type="number"> 
-                            </mat-form-field>
-                        </div> 
-                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Availibility Count</mat-label>
-                                <input matInput formControlName="availableCount" type="number">
-                            </mat-form-field>
-                        </div>  
+                        
+                      
                         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Weight</mat-label>

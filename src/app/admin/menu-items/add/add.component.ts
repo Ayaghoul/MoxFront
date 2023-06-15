@@ -41,8 +41,8 @@ chefs:any
             "description": null,
             "price": [null, Validators.required],
             "image": null,
-            "discount": null,
-            "availableCount": null,
+            "discount": 0,
+            "availableCount": 0,
             "weight": null,
             "isVegetarian": false,
             "categoryId": [null, Validators.required],
@@ -73,6 +73,8 @@ chefs:any
     }
     public getChefs() {
         this.cartService.getAllChefs().subscribe(res => {
+            console.log(res);
+            
             this.chefs = res;
         });
     }
